@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login/Register</title>
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+                <h4 class="{{message.tags}}">{{message}}</h4>
+            {% endfor %}
+            <hr>
+        {% endif %}
+        <h1>Registration</h1>
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                {{reg_form.as_table}}
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+        <hr>
+        <h1>Login</h1>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                {{log_form.as_table}}
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
