@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Success</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
         <style>
             .success {
                 color: green;
@@ -12,12 +13,14 @@
         </style>
     </head>
     <body>
-        <h1>Success! Welcome, {{user.first_name}}!</h1>
-        {% if messages %}
-            {% for message in messages %}
-                <p class="{{message.tags}}">{{message}}</p>
-            {% endfor %}
-        {% endif %}
-        <p><a href="{% url 'logout' %}">Log out</a></p>
+        <div class="container">
+            <h1>Success! Welcome, {{user.first_name}}!</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="{{message.tags}}">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <p><a href="{% url 'logout' %}">Log out</a></p>
+        </div>
     </body>
 </html>

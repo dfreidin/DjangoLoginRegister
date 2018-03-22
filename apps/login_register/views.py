@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import *
-import bcrypt
 
 # Create your views here.
 def index(request):
@@ -24,7 +23,7 @@ def register(request):
     form = UserRegForm(request.POST)
     if form.is_valid():
         new_user = form.save(commit=False)
-        new_user.password = bcrypt.hashpw(form.cleaned_data["password"].encode(), bcrypt.gensalt())
+        new_user.encrypt_password()
         new_user.save()
         request.session["user_id"] = new_user.id
         messages.success(request, "Successfully registered!")
@@ -44,7 +43,7 @@ def login(request):
             return redirect(index)
         user = users[0]
         pw = form.cleaned_data["password"]
-        if bcrypt.checkpw(pw.encode(), user.password.encode()):
+        if user.check_password(pw):
             request.session["user_id"] = user.id
             messages.success(request, "Successfully logged in!")
             return redirect(success)

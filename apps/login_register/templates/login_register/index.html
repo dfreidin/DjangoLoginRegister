@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Login/Register</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
         <style>
             .error {
                 color: red;
@@ -12,28 +13,30 @@
         </style>
     </head>
     <body>
-        {% if messages %}
-            {% for message in messages %}
-                <h4 class="{{message.tags}}">{{message}}</h4>
-            {% endfor %}
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <h5 class="{{message.tags}}">{{message}}</h5>
+                {% endfor %}
+                <hr>
+            {% endif %}
+            <h1>Registration</h1>
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{reg_form.as_table}}
+                </table>
+                <input type="submit" value="Submit">
+            </form>
             <hr>
-        {% endif %}
-        <h1>Registration</h1>
-        <form action="{% url 'register' %}" method="POST">
-            {% csrf_token %}
-            <table>
-                {{reg_form.as_table}}
-            </table>
-            <input type="submit" value="Submit">
-        </form>
-        <hr>
-        <h1>Login</h1>
-        <form action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            <table>
-                {{log_form.as_table}}
-            </table>
-            <input type="submit" value="Submit">
-        </form>
+            <h1>Login</h1>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{log_form.as_table}}
+                </table>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </body>
 </html>
